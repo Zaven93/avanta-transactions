@@ -1,0 +1,47 @@
+type Transaction @model {
+    id: ID!
+    totalPrice: String
+    totalBonusAmount: Int
+    note: String
+    currency: String
+    products: [Product]
+    customer: [Customer]
+}
+
+type Customer {
+    id: ID!
+    firstName: String
+    lastName: String
+    phone: String
+    email: String
+}
+
+type Product {
+    id: ID!
+    title: String
+    bonusPercentage: String
+    priceAmount: String
+    priceCurrency: String
+    image: String
+}
+
+type PaymentRequest @model {
+    id: ID!
+    orderId: ID
+    customerId: ID
+    bonusAmount: Int
+    status: PaymentStatus
+    products: [PaymentProduct]
+}
+
+type PaymentProduct {
+    originalUnitPrice: Int
+    variantId: ID
+    quantity: Int
+}
+
+enum PaymentStatus {
+    PENDING
+    APPROVED
+    DECLINED
+}
